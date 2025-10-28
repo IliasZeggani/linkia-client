@@ -101,6 +101,10 @@ export default function OrgList() {
       <div style={{ marginTop: 24 }}>
         <a href="/org/create">Create new organization</a>
       </div>
+      <div style={{ marginTop: 12 }}>
+        <a href="/" style={{ textDecoration: 'none', color: '#0a7f2e' }}>← Back to Linkia</a>
+      </div>
+
     </div>
   );
 }

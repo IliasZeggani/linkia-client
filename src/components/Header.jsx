@@ -104,7 +104,11 @@ export default function Header() {
         </span>
       </div>
 
-      <div>
+
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        <Link to="/org" style={{ textDecoration: 'none' }}>Organizations</Link>
+        <Link to="/org/create" style={{ textDecoration: 'none' }}>Add Organization</Link>
+        <Link to="/me" style={{ textDecoration: 'none' }}>Profile</Link>
         <button
           onClick={logout}
           style={{

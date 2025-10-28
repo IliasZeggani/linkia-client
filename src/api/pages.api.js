@@ -53,7 +53,7 @@ export async function updatePage(id, payload) {
 export async function getPublicPageByCode(code, opts = {}) {
   const params = new URLSearchParams();
   if (opts.password) params.set('password', opts.password);
-  const res = await fetch(`/api/public/pages/${encodeURIComponent(code)}?` + params.toString(), {
+  const res = await fetch(`/public/pages/${encodeURIComponent(code)}?` + params.toString(), {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   });

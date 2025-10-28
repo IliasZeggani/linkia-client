@@ -151,7 +151,7 @@ export default function PageList() {
       <div style={{ border: '1px solid #e2e8f0', borderRadius: 10, overflow: 'hidden' }}>
         {/* Head */}
         <div
-          style={{ display: 'grid', gridTemplateColumns: '2fr 1.1fr 0.8fr 1fr 1fr 0.9fr', background: '#f8fafc', padding: '10px 12px', borderBottom: '1px solid #e2e8f0' }}
+          style={{ display: 'grid', gridTemplateColumns: '2fr 1.1fr 0.8fr 1fr 1fr 0.9fr 0.8fr', background: '#f8fafc', padding: '10px 12px', borderBottom: '1px solid #e2e8f0' }}
         >
           <SortHeader label="Name" col="name" sort={sort} dir={dir} onSort={onSort} />
           <SortHeader label="Code" col="code" sort={sort} dir={dir} onSort={onSort} />
@@ -159,6 +159,7 @@ export default function PageList() {
           <SortHeader label="Items" col="items_count" sort={sort} dir={dir} onSort={onSort} />
           <SortHeader label="Additions" col="additions_count" sort={sort} dir={dir} onSort={onSort} />
           <SortHeader label="Updated" col="updated_at" sort={sort} dir={dir} onSort={onSort} />
+          <div style={{ fontWeight: 600 }}>Open</div> {/* 👈 New column header */}
         </div>
 
         {/* Body */}
@@ -175,7 +176,7 @@ export default function PageList() {
               onClick={() => navigate(`/pages/${r.id}/edit`)}
               style={{
                 display: 'grid',
-                gridTemplateColumns: '2fr 1.1fr 0.8fr 1fr 1fr 0.9fr',
+                gridTemplateColumns: '2fr 1.1fr 0.8fr 1fr 1fr 0.9fr 0.8fr', // 👈 added an extra column
                 padding: '10px 12px',
                 borderTop: '1px solid #f1f5f9',
                 cursor: 'pointer'
@@ -187,6 +188,24 @@ export default function PageList() {
               <div>{r.items_count ?? 0}</div>
               <div>{r.additions_count ?? 0}</div>
               <div>{new Date(r.updated_at).toLocaleString()}</div>
+              <div>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation(); // prevent navigating to edit page
+                    window.open(`/${r.code}`, '_blank', 'noopener,noreferrer');
+                  }}
+                  style={{
+                    padding: '6px 10px',
+                    borderRadius: 6,
+                    border: '1px solid #0ea5e9',
+                    background: '#0ea5e9',
+                    color: 'white',
+                    cursor: 'pointer'
+                  }}
+                >
+                  Open
+                </button>
+              </div>
             </div>
           ))
         )}

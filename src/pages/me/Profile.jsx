@@ -4,11 +4,12 @@ import { getMe, updateMe } from '../../api/me.api';
 import FormInput from '../../components/FormInput';
 import Button from '../../components/Button';
 import ErrorText from '../../components/ErrorText';
+import { Link } from 'react-router-dom';
 
 export default function Profile() {
   const { user: userFromCtx, loadMe, logout } = useAuth();
   const [user, setUser] = useState(userFromCtx || null);
-  const [fullName, setFullName] = useState(userFromCtx?.full_name|| '');
+  const [fullName, setFullName] = useState(userFromCtx?.full_name || '');
   const [birthday, setBirthday] = useState(userFromCtx?.birthday || '');
   const [loading, setLoading] = useState(!userFromCtx);
   const [saving, setSaving] = useState(false);
@@ -56,14 +57,19 @@ export default function Profile() {
 
   return (
     <div style={{ maxWidth: 600, margin: '40px auto', padding: '0 16px' }}>
+      <div style={{ marginBottom: 12 }}>
+        <Link to="/" style={{ marginRight: 16 }}>← Linkia</Link>
+        <Link to="/me/password">Change Password</Link>
+      </div>
+
       <h2>My Profile</h2>
 
       <form onSubmit={save}>
-        <FormInput label="Full name" value={fullName} onChange={(e)=>setFullName(e.target.value)} />
-        <FormInput label="Birthday" type="date" value={birthday || ''} onChange={(e)=>setBirthday(e.target.value)} />
+        <FormInput label="Full name" value={fullName} onChange={(e) => setFullName(e.target.value)} />
+        <FormInput label="Birthday" type="date" value={birthday || ''} onChange={(e) => setBirthday(e.target.value)} />
 
         <Button type="submit" loading={saving} style={{ marginTop: 12, width: 'auto' }}>Save</Button>
-        {ok && <div style={{ color:'#0a7f2e', marginTop:10 }}>{ok}</div>}
+        {ok && <div style={{ color: '#0a7f2e', marginTop: 10 }}>{ok}</div>}
         <ErrorText>{err}</ErrorText>
       </form>
 

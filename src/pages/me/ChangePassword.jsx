@@ -4,6 +4,7 @@ import FormInput from '../../components/FormInput';
 import ErrorText from '../../components/ErrorText';
 import { changePassword } from '../../api/me.api';
 import { useAuth } from '../../auth/AuthContext';
+import { Link } from 'react-router-dom';
 
 export default function ChangePassword() {
   const { applyTokens } = useAuth();
@@ -39,13 +40,19 @@ export default function ChangePassword() {
 
   return (
     <div style={{ maxWidth: 600, margin: '40px auto', padding: '0 16px' }}>
+
+      <div style={{ marginBottom: 12 }}>
+        <Link to="/" style={{ marginRight: 16 }}>← Linkia</Link>
+        <Link to="/me">Profile</Link>
+      </div>
+
       <h2>Change password</h2>
       <form onSubmit={submit}>
-        <FormInput label="Current password" type="password" value={currentPassword} onChange={(e)=>setCurrentPassword(e.target.value)} />
-        <FormInput label="New password" type="password" value={newPassword} onChange={(e)=>setNewPassword(e.target.value)} />
-        <FormInput label="Confirm new password" type="password" value={confirm} onChange={(e)=>setConfirm(e.target.value)} />
+        <FormInput label="Current password" type="password" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} />
+        <FormInput label="New password" type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+        <FormInput label="Confirm new password" type="password" value={confirm} onChange={(e) => setConfirm(e.target.value)} />
         <Button type="submit" loading={loading} style={{ marginTop: 12, width: 'auto' }}>Update password</Button>
-        {ok && <div style={{ color:'#0a7f2e', marginTop:10 }}>{ok}</div>}
+        {ok && <div style={{ color: '#0a7f2e', marginTop: 10 }}>{ok}</div>}
         <ErrorText>{err}</ErrorText>
       </form>
     </div>
