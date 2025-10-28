@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { getRefreshToken, setRefreshToken, clearRefreshToken, getRefreshScope } from '../utils/storage';
 
+const API_BASE = (process.env.REACT_APP_API_BASE || '').replace(/\/+$/, ''); // strip trailing slash
+
 // Keep access token only in memory
 let accessToken = null;
 export const setAccessToken = (token) => {
@@ -9,7 +11,7 @@ export const setAccessToken = (token) => {
 
 // Axios instance
 const http = axios.create({
-  baseURL: '/api',
+  baseURL: API_BASE, // e.g. https://linkia-server.onrender.com/api
   headers: { 'Content-Type': 'application/json' },
 });
 
