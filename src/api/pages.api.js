@@ -50,16 +50,19 @@ export async function updatePage(id, payload) {
 }
 
 /** (will use later) Public page by code */
+/** Public page by code */
 export async function getPublicPageByCode(code, opts = {}) {
-  const params = new URLSearchParams();
-  if (opts.password) params.set('password', opts.password);
-  const res = await fetch(`/public/pages/${encodeURIComponent(code)}?` + params.toString(), {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-  });
-  if (!res.ok) throw new Error((await res.json()).error || `HTTP ${res.status}`);
-  return res.json();
+  if (opts.password) {
+    const { data } = await http.post(`/public/pages/${encodeURIComponent(code)}/unlock`, {
+      password: opts.password,
+    });
+    return data;
+  }
+
+  const { data } = await http.get(`/public/pages/${encodeURIComponent(code)}`);
+  return data;
 }
+
 
 // Public: lookup a discount by name for a page code
 export async function lookupPublicDiscount(pageCode, discountCode) {
